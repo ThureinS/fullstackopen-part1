@@ -30,7 +30,6 @@ const App = () => {
     let result = votes.reduce((largest, current) =>
       current > largest ? current : largest,
     );
-    console.log(result);
     result = votes.indexOf(result);
     return result;
   }
