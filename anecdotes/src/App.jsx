@@ -18,7 +18,6 @@ const App = () => {
   function handleRandomAnecdote() {
     const randomSelect = Math.floor(Math.random() * anecdotes.length);
     setSelected(randomSelect);
-    console.log(randomSelect);
   }
 
   function handleVote(selected) {
@@ -27,12 +26,29 @@ const App = () => {
     setVotes(result);
   }
 
+  function calculateMostVotes() {
+    let result = votes.reduce((largest, current) =>
+      current > largest ? current : largest,
+    );
+    console.log(result);
+    result = votes.indexOf(result);
+    return result;
+  }
+
   return (
     <div>
-      <div>{anecdotes[selected]}</div>
-      <p>has {votes[selected]} votes</p>
-      <button onClick={() => handleVote(selected)}>vote</button>
-      <button onClick={handleRandomAnecdote}>next anecdote</button>
+      <div>
+        <h1>Anecdote of the day</h1>
+        <div>{anecdotes[selected]}</div>
+        <p>has {votes[selected]} votes</p>
+        <button onClick={() => handleVote(selected)}>vote</button>
+        <button onClick={handleRandomAnecdote}>next anecdote</button>
+      </div>
+      <div>
+        <h1>Anecdote with most votes</h1>
+        <div>{anecdotes[calculateMostVotes()]}</div>
+        <p>has {votes[calculateMostVotes()]} votes</p>
+      </div>
     </div>
   );
 };
